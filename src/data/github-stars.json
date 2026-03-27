@@ -1,0 +1,22 @@
+{
+  "https://github.com/Cap-go/capacitor-updater": 595,
+  "https://github.com/Cap-go/capacitor-native-biometric": 128,
+  "https://github.com/Cap-go/capacitor-social-login": 112,
+  "https://github.com/Cap-go/capacitor-file-compressor": 104,
+  "https://github.com/Cap-go/capacitor-screen-recorder": 96,
+  "https://github.com/Cap-go/capacitor-native-purchases": 93,
+  "https://github.com/Cap-go/capacitor-audio-recorder": 91,
+  "https://github.com/Cap-go/capacitor-app-tracking-transparency": 88,
+  "https://github.com/Cap-go/capacitor-android-inline-install": 85,
+  "https://github.com/Cap-go/capacitor-zip": 81,
+  "https://github.com/Cap-go/capacitor-mute": 74,
+  "https://github.com/Cap-go/capacitor-updater-cli": 70,
+  "https://github.com/Cap-go/capacitor-crisp": 66,
+  "https://github.com/Cap-go/capacitor-native-market": 63,
+  "https://github.com/Cap-go/capacitor-file": 61,
+  "https://github.com/Cap-go/capacitor-camera-preview": 59,
+  "https://github.com/Cap-go/capacitor-pdf-generator": 56,
+  "https://github.com/Cap-go/capacitor-contacts": 51,
+  "https://github.com/Cap-go/capacitor-ivs-player": 48,
+  "https://github.com/Cap-go/capacitor-data-storage-sqlite": 44
+}

@@ -1,0 +1,13 @@
+{
+  "website_description": "Minimal repro for Starlight reset CSS leaking onto website routes.",
+  "language_label": "Language",
+  "marketing_home": "Marketing home",
+  "home": "Home",
+  "about": "About",
+  "features": "Features",
+  "docs": "Docs",
+  "landing_automation_subtitle": "Automation",
+  "landing_automation_title": "Home page component with scoped Astro CSS",
+  "landing_automation_description": "This section mirrors the landing page shape more closely by adding a website component style block on /.",
+  "landing_automation_submit": "Ship update"
+}

@@ -1,7 +1,25 @@
+---
+import * as m from '@/messages'
+import { locales } from '@/services/locale'
+
+const currentLocale = Astro.locals.locale
+---
+
 <div class="language-select">
-  <span class="label">Docs locale</span>
-  <span class="value">EN</span>
+  <span class="label">{m.language_label({}, { locale: currentLocale })}</span>
+  <span class="value">{currentLocale.toUpperCase()}</span>
 </div>
+
+<script is:inline define:vars={{ locales, currentLocale }}>
+  document.querySelectorAll('[data-lang-link]').forEach((node) => {
+    node.addEventListener('click', () => {
+      const locale = node.getAttribute('data-lang-link')
+      if (!locale) return
+      const pathname = window.location.pathname.replace(`/${currentLocale}/`, '/')
+      window.location.href = locale === 'en' ? pathname : `/${locale}${pathname}`
+    })
+  })
+</script>
 
 <style>
   .language-select {

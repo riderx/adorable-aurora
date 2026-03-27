@@ -1,0 +1,188 @@
+---
+import * as m from '@/messages'
+import { locales } from '@/services/locale'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = Astro.locals.locale || 'en'
+const year = new Date().getFullYear()
+const localeFlags: Record<string, string> = {
+  de: 'DE',
+  en: 'EN',
+  es: 'ES',
+  fr: 'FR',
+  id: 'ID',
+  it: 'IT',
+  ja: 'JA',
+  ko: 'KO',
+  zh: 'ZH',
+}
+
+const heroLinks = [
+  {
+    href: 'https://climate.stripe.com/vxDf62',
+    label: m.carbon_removal({}, { locale }),
+    icon: '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 9.8-7 10-3.5-.2-7-5-7-10V6l7-4z"></path></svg>',
+  },
+  {
+    href: 'https://github.com/Cap-go/',
+    label: m.open_source({}, { locale }),
+    icon: '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12a10 10 0 006.84 9.5c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.5 9.5 0 0112 6.84a9.5 9.5 0 012.5.34c1.9-1.3 2.75-1.03 2.75-1.03.54 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0022 12c0-5.52-4.48-10-10-10z"></path></svg>',
+  },
+  {
+    href: 'https://supabase.com/',
+    label: m.built_with_supabase({}, { locale }),
+    icon: '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M6 20c0-.7.2-1.4.7-2l9-14A1.5 1.5 0 0118.3 5l-2.3 15.6c-.1.8-.8 1.4-1.6 1.4H7.5A1.5 1.5 0 016 20z"></path></svg>',
+  },
+  {
+    href: 'https://x.com/martindonadieu/',
+    label: m.build_in_public_on_twitter({}, { locale }),
+    icon: '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.3l-5-6.6L5.9 22H2.8l7.3-8.4L1 2h6.5l4.5 6 6-6z"></path></svg>',
+  },
+]
+
+const sections = [
+  {
+    label: m.products({}, { locale }),
+    items: [
+      { href: getRelativeLocaleUrl(locale, 'live-update'), label: m.live_update({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'native-build'), label: m.native_build({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'app_mobile'), label: m.app_mobile({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'plugins'), label: m.plugins({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'integrations'), label: m.integrations_badge({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'docs/cli'), label: m.cli_and_api({}, { locale }) },
+    ],
+  },
+  {
+    label: m.solutions({}, { locale }),
+    items: [
+      { href: getRelativeLocaleUrl(locale, 'register'), label: m.register({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'docs'), label: m.documentation({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'ci_cd'), label: m.ci_cd_integration({}, { locale }) },
+      { href: 'https://github.com/riderx/awesome-capacitor/', label: m.awesome_capacitor({}, { locale }), target: '_blank' },
+      { href: getRelativeLocaleUrl(locale, 'alternatives'), label: m.alternatives({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'semver_tester'), label: m.semver_tester({}, { locale }) },
+    ],
+  },
+  {
+    label: m.support({}, { locale }),
+    items: [
+      { href: 'https://discord.capgo.app', label: m.community({}, { locale }), target: '_blank' },
+      { href: getRelativeLocaleUrl(locale, 'pricing'), label: m.pricing({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'sponsor'), label: m.sponsor({}, { locale }) },
+      { href: 'https://support.capgo.app', label: m.chat({}, { locale }), rel: 'nofollow' },
+      { href: 'https://status.capgo.app/', label: m.status({}, { locale }), target: '_blank' },
+    ],
+  },
+  {
+    label: m.company({}, { locale }),
+    items: [
+      { href: getRelativeLocaleUrl(locale, 'about'), label: m.about({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'enterprise'), label: m.enterprise_title({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'contributing'), label: m.contributing({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'trust'), label: m.trust({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'consulting'), label: m.consulting({}, { locale }) },
+    ],
+  },
+  {
+    label: m.compare({}, { locale }),
+    items: [
+      { href: getRelativeLocaleUrl(locale, 'alternatives'), label: m.alternatives({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'ionic-appflow'), label: m.capflow_nav_label({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'capwesome'), label: m.capwesome_nav_label({}, { locale }) },
+    ],
+  },
+  {
+    label: m.legal({}, { locale }),
+    items: [
+      { href: getRelativeLocaleUrl(locale, 'privacy'), label: m.privacy({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'support-policy'), label: m.support_policy({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'sla'), label: m.sla({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'aup'), label: m.aup({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'security'), label: m.security_txt({}, { locale }) },
+      { href: getRelativeLocaleUrl(locale, 'bug-bounty'), label: m.bug_bounty({}, { locale }) },
+    ],
+  },
+]
+---
+
+<footer class="bg-gray-900 text-white" aria-labelledby="footer-heading">
+  <p id="footer-heading" class="sr-only">{m.footer({}, { locale })}</p>
+  <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mb-12 flex flex-col items-start justify-between lg:flex-row lg:items-center">
+      <h2 class="mb-6 max-w-2xl text-3xl font-bold tracking-tight text-white md:text-4xl lg:mb-0">
+        {m.footer_tagline_part1({}, { locale })}
+        <span class="block text-zinc-500">{m.footer_tagline_part2({}, { locale })}</span>
+      </h2>
+      <a
+        href={getRelativeLocaleUrl(locale, 'plugins')}
+        class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      >
+        {m.install_plugin({}, { locale })}
+      </a>
+    </div>
+
+    <div class="mb-12 flex flex-wrap gap-6 border-b border-zinc-800 pb-12">
+      {
+        heroLinks.map((item) => (
+          <a href={item.href} target="_blank" rel="noreferrer" class="flex items-center text-sm text-zinc-400 transition-colors hover:text-white">
+            <div class="mr-2 h-5 w-5 text-blue-500 [&>svg]:h-full [&>svg]:w-full" set:html={item.icon} />
+            <span>{item.label}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mb-12 grid grid-cols-2 gap-8 md:grid-cols-6">
+      {
+        sections.map((section) => (
+          <div>
+            <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{section.label}</h3>
+            <ul role="list" class="space-y-3">
+              {
+                section.items.map((item) => (
+                  <li>
+                    <a href={item.href} target={item.target} rel={item.rel} class="text-sm text-zinc-400 transition-colors hover:text-white">
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="relative flex flex-col items-start justify-between gap-8 border-t border-zinc-800 pt-8 md:flex-row">
+      <div class="flex flex-col items-start gap-4">
+        <a href="https://status.capgo.app/" target="_blank" class="flex items-center text-sm text-zinc-400 hover:text-white">
+          <span class="relative mr-2 flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
+          {m.all_systems_normal_uptime({}, { locale })}
+        </a>
+        <div class="flex gap-4">
+          <img src="/soc2.svg" alt="SOC 2 Compliant" class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
+          <img src="/soc1.svg" alt="SOC 1 Compliant" class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
+          <img src="/gdpr.svg" alt="GDPR Compliant" class="h-12 w-auto opacity-80 transition-opacity hover:opacity-100" />
+        </div>
+      </div>
+
+      <div class="flex w-full flex-col gap-6 md:w-auto md:items-end">
+        <div class="flex flex-wrap gap-2 text-xs uppercase tracking-wider text-zinc-500">
+          {
+            locales.map((entry) => (
+              <a href={getRelativeLocaleUrl(entry)} class="rounded border border-zinc-800 px-2 py-1 transition-colors hover:border-zinc-600 hover:text-white">
+                {localeFlags[entry] || entry.toUpperCase()}
+              </a>
+            ))
+          }
+        </div>
+        <p class="text-xs tracking-wider text-zinc-500 uppercase">
+          &copy; {year} CAPGO, Digital shift OU. {m.copyright_notice({}, { locale })}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

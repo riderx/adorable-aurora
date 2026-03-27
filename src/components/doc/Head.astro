@@ -1,5 +1,18 @@
 ---
+import * as m from '@/messages'
+
 const { head } = Astro.locals.starlightRoute
+const messageLocale = Astro.locals.locale
+
+if (!head.some(({ tag, attrs }) => tag === 'meta' && attrs?.name === 'description')) {
+  head.push({
+    tag: 'meta',
+    attrs: {
+      name: 'description',
+      content: m.website_description({}, { locale: messageLocale }),
+    },
+  })
+}
 ---
 
 {head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}

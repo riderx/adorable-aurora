@@ -1,0 +1,22 @@
+{
+  "@capgo/capacitor-updater": 49200,
+  "@capgo/capacitor-native-biometric": 18600,
+  "@capgo/capacitor-social-login": 17200,
+  "@capgo/capacitor-file-compressor": 16400,
+  "@capgo/capacitor-screen-recorder": 15300,
+  "@capgo/capacitor-native-purchases": 14900,
+  "@capgo/capacitor-audio-recorder": 14200,
+  "@capgo/capacitor-app-tracking-transparency": 13800,
+  "@capgo/capacitor-android-inline-install": 13100,
+  "@capgo/capacitor-zip": 12600,
+  "@capgo/capacitor-mute": 11800,
+  "@capgo/capacitor-updater-cli": 11400,
+  "@capgo/capacitor-crisp": 10600,
+  "@capgo/capacitor-native-market": 9800,
+  "@capgo/capacitor-file": 9400,
+  "@capgo/capacitor-camera-preview": 9100,
+  "@capgo/capacitor-pdf-generator": 8800,
+  "@capgo/capacitor-contacts": 8200,
+  "@capgo/capacitor-ivs-player": 7800,
+  "@capgo/capacitor-data-storage-sqlite": 7400
+}

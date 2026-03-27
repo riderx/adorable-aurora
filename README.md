@@ -1,6 +1,6 @@
-# Astro 6 + Starlight Reset Repro
+# Astro 6 + Starlight CSS Leak Repro
 
-Minimal reproduction for a style leak where Starlight reset CSS appears on non-doc routes.
+Minimal reproduction for a preview-mode leak where Starlight base/reset CSS is attached to `/` even though Starlight only serves `/docs/`.
 
 ## Stack
 
@@ -8,44 +8,43 @@ Minimal reproduction for a style leak where Starlight reset CSS appears on non-d
 - `@astrojs/starlight` `0.38.2`
 - `@astrojs/cloudflare` `13.1.4`
 - Tailwind CSS v4 via `@tailwindcss/vite`
-- `@astrojs/starlight-tailwind`
-
-## Routes
-
-- `/` is a regular Astro page using a custom layout and Tailwind website CSS.
-- `/docs/` is a Starlight page.
 
 ## Repro
 
 ```bash
 bun install
-bun run dev
+bun run build
+bun run preview
 ```
 
-Open:
+Then open:
 
-- `http://localhost:4321/`
-- `http://localhost:4321/docs/`
+- `http://127.0.0.1:4321/`
+- `http://127.0.0.1:4321/docs/`
 
-## What To Check
+## Expected
 
-On `/`, the "Plain H1 on the website route" block prints computed styles.
+- `/` should only load the website stylesheet.
+- `/docs/` should load the Starlight styles.
 
-Expected on `/`:
+## Actual
 
-- browser-default heading and paragraph margins
-- website font family from `src/styles/site.css`
-- no Starlight body reset
+- `/` also loads the shared Starlight stylesheet.
+- In the current build, `/` includes both:
+  - `/_astro/index@_@astro.CY5fRZ19.css`
+  - `/_astro/index@_@astro.EnuQFs_q.css`
+- `/docs/` includes:
+  - `/_astro/index@_@astro.EnuQFs_q.css`
+  - `/_astro/print.ehPL0gv-.css`
 
-Unexpected behavior being reproduced:
+`index@_@astro.EnuQFs_q.css` contains the Starlight base layer (`@layer starlight.base`), so it is leaking onto the non-doc page.
 
-- heading and paragraph margins become `0px`
-- body font/background shift to Starlight values even though the page is not a docs route
+## Minimal Trigger In This Repro
 
-## Files
+The shared website layout imports `src/components/Header.astro`, and that header imports:
 
-- `src/pages/index.astro`: marketing page
-- `src/styles/site.css`: website Tailwind CSS
-- `src/content/docs/docs/index.mdx`: docs route at `/docs/`
-- `src/styles/docs.css`: Starlight Tailwind CSS
-- `astro.config.mjs`: Cloudflare adapter + Starlight + Tailwind config
+```astro
+import { getRelativeLocaleUrl } from 'astro:i18n'
+```
+
+Replacing that with a local helper makes the shared Starlight CSS stop appearing on `/`.

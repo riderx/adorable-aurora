@@ -1,8 +1,8 @@
-# Bug: Starlight reset CSS leaks from `/docs` into non-Starlight routes on Astro 6
+# Bug: Starlight base CSS leaks from `/docs` into `/` in Astro preview
 
 ## Summary
 
-In this minimal Astro 6 project, Starlight is only used for the `/docs` section, but its global reset styles appear to affect the regular website route at `/`.
+This repro uses Starlight only for `/docs/`, but the home page `/` still gets a shared Starlight stylesheet in preview mode.
 
 ## Environment
 
@@ -10,29 +10,34 @@ In this minimal Astro 6 project, Starlight is only used for the `/docs` section,
 - `@astrojs/starlight` `0.38.2`
 - `@astrojs/cloudflare` `13.1.4`
 - Tailwind CSS v4 with `@tailwindcss/vite`
-- `@astrojs/starlight-tailwind`
 
 ## Reproduction
 
 1. `bun install`
-2. `bun run dev`
-3. Open `/`
-4. Open `/docs/`
-5. Return to `/` and inspect the debug block
+2. `bun run build`
+3. `bun run preview`
+4. Open `http://127.0.0.1:4321/`
+5. Open `http://127.0.0.1:4321/docs/`
 
 ## Expected
 
-Only `/docs/*` should receive the Starlight reset and base styles.
+Only `/docs/` should load Starlight base/reset CSS.
 
 ## Actual
 
-The marketing page at `/` picks up reset-like behavior from Starlight:
+`/` also loads the same Starlight stylesheet used by docs:
 
-- heading and paragraph margins collapse to `0px`
-- body styles look like Starlight rather than the site layout styles
+- `/` loads `/_astro/index@_@astro.EnuQFs_q.css`
+- `/docs/` also loads `/_astro/index@_@astro.EnuQFs_q.css`
 
-## Notes
+That file contains `@layer starlight.base`, including the Starlight CSS variables and reset/base rules.
 
-- The home page uses a separate Astro layout and website stylesheet.
-- Starlight only powers the docs content under `src/content/docs/docs/*`.
-- The project uses the Cloudflare adapter because the original app that exposed the issue also does.
+## Minimal Trigger
+
+The smallest trigger isolated in this repro is the shared header importing:
+
+```astro
+import { getRelativeLocaleUrl } from 'astro:i18n'
+```
+
+If that import is removed and replaced with a local URL helper, `/` stops receiving the shared Starlight stylesheet.

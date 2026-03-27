@@ -1,92 +1,24 @@
 ---
-export const prerender = false
-
-import * as m from '@/messages'
-import LandingFragment from '@/components/landing/LandingFragment.astro'
 import Layout from '../layouts/Layout.astro'
-
-const locale = 'en'
 ---
 
-<Layout
-  content={{
-    title: 'Astro Starlight Tailwind Issue',
-    description: m.website_description({}, { locale }),
-  }}
->
-  <div class="mx-auto flex max-w-5xl flex-col gap-10 px-6 py-16 text-white">
-    <div class="space-y-4">
-      <p class="font-pj text-sm font-semibold tracking-[0.2em] text-sky-400 uppercase">Website Route</p>
-      <h1 class="font-pj text-5xl font-semibold tracking-tight text-balance">Tailwind marketing page at <code>/</code></h1>
-      <p class="max-w-2xl text-lg leading-8 text-gray-300">
-        This page should keep normal website styles. Starlight reset CSS should only affect <code>/docs</code>.
+<Layout>
+  <div class="space-y-6 text-slate-100">
+    <div class="space-y-2">
+      <p class="text-sm font-semibold tracking-[0.2em] text-sky-400 uppercase">Website Route</p>
+      <h1 class="text-5xl font-semibold tracking-tight">`/` should not receive Starlight reset CSS</h1>
+      <p class="max-w-2xl text-lg text-slate-300">
+        The box below intentionally relies on browser default margins. If Starlight reset leaks here, the heading and paragraph margins collapse.
       </p>
-      <a href="/docs/" class="inline-flex w-fit items-center rounded-full bg-white px-5 py-3 text-sm font-medium text-gray-950 transition hover:bg-gray-200">
-        Open docs
-      </a>
     </div>
-    <section class="rounded-3xl border border-gray-800 bg-white p-8 text-gray-900 shadow-sm shadow-black/30">
-      <p class="mb-4 text-sm text-gray-500">
-        The elements below intentionally rely on browser defaults. If the Starlight reset leaks onto this page,
-        the heading and paragraph margins collapse to <code>0px</code>.
-      </p>
 
+    <section class="rounded-3xl bg-white p-8 text-slate-900">
       <h1 id="native-heading">Plain H1 on the website route</h1>
       <p id="native-paragraph">This paragraph should keep browser default top and bottom margins.</p>
       <button id="native-button" type="button">Plain button</button>
-
-      <pre id="debug-output" class="mt-6 overflow-x-auto rounded-2xl bg-slate-950 p-4 text-sm text-slate-100"></pre>
+      <p class="mt-6">
+        <a href="/docs/">Open docs</a>
+      </p>
     </section>
   </div>
-
-  <LandingFragment />
-
-  <style is:global>
-    .teleport-line-animation {
-      left: -100%;
-      background: rgb(56 189 248 / 0.3);
-      animation: teleport-line 5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
-    }
-
-    @keyframes teleport-line {
-      0% {
-        transform: translateX(0) scaleX(0.1);
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 0.5;
-      }
-
-      100% {
-        transform: translateX(200%) scaleX(1);
-        opacity: 0;
-      }
-    }
-  </style>
-
-  <script is:inline>
-    const heading = document.getElementById('native-heading')
-    const paragraph = document.getElementById('native-paragraph')
-    const output = document.getElementById('debug-output')
-
-    if (heading && paragraph && output) {
-      const bodyStyles = getComputedStyle(document.body)
-      const headingStyles = getComputedStyle(heading)
-      const paragraphStyles = getComputedStyle(paragraph)
-
-      output.textContent = JSON.stringify(
-        {
-          bodyFontFamily: bodyStyles.fontFamily,
-          bodyBackgroundColor: bodyStyles.backgroundColor,
-          headingMarginTop: headingStyles.marginTop,
-          headingMarginBottom: headingStyles.marginBottom,
-          paragraphMarginTop: paragraphStyles.marginTop,
-          paragraphMarginBottom: paragraphStyles.marginBottom,
-        },
-        null,
-        2,
-      )
-    }
-  </script>
 </Layout>

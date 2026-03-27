@@ -1,25 +1,10 @@
 ---
 title: Docs Home
-description: Starlight documentation route mounted under /docs.
+description: Starlight docs mounted at /docs.
 ---
-
-import MicroCard from '@/components/MicroCard.astro'
 
 # Docs Home
 
 This page is rendered by Starlight at `/docs/`.
 
-- The website route `/` uses a separate Astro layout with Tailwind.
-- Starlight reset CSS should stay inside docs pages.
-
-<div class="sl-flex sl-flex-wrap sl-gap-4 not-content">
-  <MicroCard href="/docs/getting-started/" title="Getting Started" icon="open-book">
-    Docs-only card that imports Starlight's <code>Icon</code> through a local component.
-  </MicroCard>
-  <MicroCard href="/docs/getting-started/" title="CLI Guide" icon="package">
-    This mirrors the landing setup more closely than importing Starlight components on `/`.
-  </MicroCard>
-  <MicroCard href="/docs/getting-started/" title="Deploy" icon="rocket">
-    If the leak is caused by this shared docs graph, `/` should now pick up the same reset chunk.
-  </MicroCard>
-</div>
+The website route `/` uses a separate Astro layout.

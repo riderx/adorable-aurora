@@ -1,7 +1,10 @@
 ---
+// THIS make the CSS leak happen:
 import { getRelativeLocaleUrl } from 'astro:i18n'
-
 const docsHref = getRelativeLocaleUrl('en', 'docs')
+//THIS make the leak avoided:
+// Keeping the shared website shell free of `astro:i18n` avoids the leaked Starlight base chunk on `/`.
+// const docsHref = '/docs/'
 ---
 
 <header class="border-b border-slate-700 bg-slate-950">
